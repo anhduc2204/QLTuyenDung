@@ -2,6 +2,7 @@
 using QLTuyenDung.DAO;
 using QLTuyenDung.Models;
 using Newtonsoft.Json;
+using QLTuyenDung.Models.ViewModels;
 
 namespace QLTuyenDung.Controllers
 {
@@ -20,17 +21,17 @@ namespace QLTuyenDung.Controllers
         }
 
         [HttpGet]
-        public IActionResult ToLogin()
+        public IActionResult Login()
         {
 
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login()
+        public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
-            string email = Request.Form["email"].ToString().Trim();
-            string matKhau = Request.Form["matKhau"].ToString().Trim();
+            string email = loginViewModel.Email.Trim();
+            string matKhau = loginViewModel.MatKhau.Trim();
             if(email == "" || matKhau == "")
             {
                 return ViewBag.Message = "Yêu cầu nhập đầy đủ thông tin!"; 
@@ -49,10 +50,16 @@ namespace QLTuyenDung.Controllers
         }
 
         [HttpGet]
-        public IActionResult ToRegister()
+        public IActionResult Register()
         {
             return View();
-        } 
+        }
+
+        [HttpPost]
+        public IActionResult Register(RegisterViewModel registerViewModel)
+        {
+            return View();
+        }
 
         public Task<NguoiDung> Authenticate(string email, string matKhau)
         {

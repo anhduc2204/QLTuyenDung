@@ -23,7 +23,7 @@ namespace QLTuyenDung.DAO
                                         .Include(t => t.NguoiDung)
                                         .FirstOrDefaultAsync(t => t.TenTaiKhoan == taiKhoan && t.MatKhau == matKhau);
 
-            return tk == null ? tk : tk.NguoiDung;
+            return tk == null ? null : tk.NguoiDung;
             
          
         }
