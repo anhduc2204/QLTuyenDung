@@ -22,7 +22,7 @@ namespace QLTuyenDung.Controllers
         {
             return View();
         }
-
        
+
     }
 }
