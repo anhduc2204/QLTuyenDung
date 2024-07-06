@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QLTuyenDung", "QLTuyenDung\QLTuyenDung.csproj", "{05334554-0E41-49C7-A1AA-811EE4BD7281}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QLTuyenDung", "QLTuyenDung\QLTuyenDung.csproj", "{05334554-0E41-49C7-A1AA-811EE4BD7281}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

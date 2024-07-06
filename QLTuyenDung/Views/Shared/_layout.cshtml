@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title>@ViewData["Title"] - My ASP.NET Application</title>
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/layout.css"/>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 <body>
@@ -79,9 +80,73 @@
     <div class="container">
         @RenderBody()
     </div>
-    <footer>
-        <p>&copy; 2024 - My ASP.NET Application</p>
+    <footer class="footer">
+        <div class="footer-social">
+            <div class="footer-social__img">
+                <img src="~/image/vng.png" alt="VNG Logo" class="footer-logo">
+            </div>
 
+            <div class="footer-social-media">
+                <div class="social-media">
+                    <i class="fa-brands fa-facebook-f icon"></i>
+                    <i class="fa-brands fa-linkedin-in icon"></i>
+                    <i class="fa-brands fa-instagram icon"></i>
+                    <i class="fa-brands fa-youtube icon"></i>
+                </div>
+                <div class="contact-info">
+                    <i class="fa-solid fa-phone telephone-icon"></i>
+                    <p class="contact-telephone">(8428) - 3962 3888</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-infor">
+            <div class="col l-2-4">
+                <h3 class="footer__heading">Về VNG</h3>
+                <ul class="footer__list">
+                    <li class="footer__item"><a href="" class="footer__item-link">Sứ mệnh</a></li>
+                    <li class="footer__item"><a href="" class="footer__item-link">Giá trị cốt lõi</a></li>
+                    <li class="footer__item"><a href="" class="footer__item-link">Cột mốc chính</a></li>
+                    <li class="footer__item"><a href="" class="footer__item-link">Ban lãnh đạo cấp cao</a></li>
+                </ul>
+            </div>
+
+            <div class="col l-2-4">
+                <h3 class="footer__heading">Tin tức</h3>
+                <ul class="footer__list">
+                    <li class="footer__item"><a href="" class="footer__item-link">Tin tức mới nhất</a></li>
+                    <li class="footer__item"><a href="" class="footer__item-link">Thư viện</a></li>
+                </ul>
+            </div>
+
+            <div class="col l-2-4">
+                <h3 class="footer__heading">Sản phẩm</h3>
+                <ul class="footer__list">
+                    <li class="footer__item"><a href="" class="footer__item-link">Trò chơi trực tuyến</a></li>
+                    <li class="footer__item"><a href="" class="footer__item-link">Zalo & AI</a></li>
+                    <li class="footer__item"><a href="" class="footer__item-link">Thanh toán và tài chính</a></li>
+                    <li class="footer__item"><a href="" class="footer__item-link">Chuyển đổi số</a></li>
+                </ul>
+            </div>
+
+            <div class="col l-2-4">
+                <h3 class="footer__heading">Con người</h3>
+                <ul class="footer__list">
+                    <li class="footer__item"><a href="" class="footer__item-link">Con người VNG</a></li>
+                    <li class="footer__item"><a href="" class="footer__item-link">Cuộc sống VNG</a></li>
+                    <li class="footer__item"><a href="" class="footer__item-link">Cơ hội nghề nghiệp</a></li>
+                </ul>
+            </div>
+
+            <div class="col l-2-4">
+                <h3 class="footer__heading">Trách nhiệm cộng đồng</h3>
+                <ul class="footer__list">
+                    <li class="footer__item"><a href="" class="footer__item-link">Quỹ kiến tạo ước mơ</a></li>
+                    <li class="footer__item"><a href="" class="footer__item-link">các chương trình nổi bật</a></li>
+                </ul>
+            </div>
+        </div>
     </footer>
+
 </body>
 </html>
