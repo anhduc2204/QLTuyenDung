@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("QLTuyenDung")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a8ea4cedd910f9eeb2db3b65b2066c8f379c1758")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+32f66257baf05da0860109c659676293e5542096")]
 [assembly: System.Reflection.AssemblyProductAttribute("QLTuyenDung")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QLTuyenDung")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
