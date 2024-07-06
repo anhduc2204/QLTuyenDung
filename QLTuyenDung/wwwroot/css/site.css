@@ -16,3 +16,23 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* site.css */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-link {
+    margin-right: 15px;
+}
+
+.footer {
+    padding: 20px 0;
+    text-align: center;
+    background-color: #f8f8f8;
+}

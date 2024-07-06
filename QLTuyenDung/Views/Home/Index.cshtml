@@ -1,8 +1,91 @@
-﻿@{
+﻿@* @{
     ViewData["Title"] = "Home Page";
-}
+} *@
 
-<div class="text-center">
+@* <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+ *@
+
+@{
+    ViewData["Title"] = "Trang chủ VNG";
+}
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/TrangChu.css">
+</head>
+<body>
+    <header class="bg-light py-4">
+        <div class="container d-flex justify-content-between align-items-center">
+            <img src="~/img/Logo.jpg" alt="" class="logo">
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item"><a href="#" class="nav-link text-dark font-weight-bold">Trang chủ</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-dark font-weight-bold">Tuyển dụng</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-dark font-weight-bold">Ứng viên</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-dark font-weight-bold">Quản lý</a></li>
+                </ul>
+            </nav>
+            <div class="login-register">
+                <a href="#" class="btn btn-outline-secondary btn-custom">Đăng nhập</a>
+                <a href="#" class="btn btn-outline-secondary ml-2 btn-custom">Đăng ký</a>
+            </div>
+        </div>
+    </header>
+    <main class="container mt-5">
+        <section class="row mb-5">
+            <div class="col-md-6 order-md-1 order-2 d-flex flex-column justify-content-between">
+                <div>
+                    <h5 class="main-heading">Việc Làm 24h - Website việc làm phổ biến nhất Việt Nam với gần 20 năm kinh nghiệm trên thị trường.</h5>
+                   @*  <p class="main-paragraph">Website việc làm phổ biến nhất Việt Nam với gần 20 năm kinh nghiệm trên thị trường.</p> *@
+                </div>
+                <section class="feature-section">
+                    <div class="feature-item mb-4">
+                        <h5 class="feature-heading">Nguồn ứng viên chất lượng</h5>
+                        <p class="feature-paragraph">Nhà tuyển dụng có thể tiếp cận nguồn ứng viên dồi dào với hơn 10 triệu hồ sơ và hơn 50 triệu lượt truy cập mỗi năm</p>
+                    </div>
+                    <div class="feature-item mb-4">
+                        <h5 class="feature-heading">Trải nghiệm toàn diện</h5>
+                        <p class="feature-paragraph">Tài khoản nhà tuyển dụng được tích hợp thêm các tính năng thông minh, giúp thuận tiện quản lý tin đăng, quản lý hồ sơ và theo dõi ứng viên, và lượng nộp đơn</p>
+                    </div>
+                    <div class="feature-item mb-4">
+                        <h5 class="feature-heading">Chi phí hợp lý</h5>
+                        <p class="feature-paragraph">Đặc quyền 12+ tin đăng miễn phí mỗi năm giúp nhà tuyển dụng tối ưu chi phí & quy trình tuyển dụng</p>
+                    </div>
+                </section>
+            </div>
+            <div class="col-md-6 order-md-2 order-1 d-flex align-items-center justify-content-center">
+                <img src="~/img/TrangChu.png" class="img-fluid" alt="Hero Image">
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-light py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-left">
+                    © 2024 VNG Corporation
+                </div>
+                <div class="col-md-6 text-right">
+                    <p class="mb-0">Liên hệ: (8428)-3962 3888</p>
+                    <p class="mb-0">Địa chỉ: Định công, Thanh Xuân, Hà Nội</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
