@@ -3,6 +3,7 @@ using QLTuyenDung.DAO;
 
 namespace QLTuyenDung.Controllers
 {
+    [Route("Admin/")]
     public class AdminController : Controller
     {
         private readonly ViecLamDAO _ViecLamdao;
@@ -13,13 +14,20 @@ namespace QLTuyenDung.Controllers
         }
 
         [HttpGet]
-        [Route("Admin/")]
+        [Route("QuanLyViecLam")]
+        [Route("")]
         public async Task<IActionResult> QuanLyViecLam()
         {
             var dsViecLam = await _ViecLamdao.GetAll();
             return View("~/Views/Admin/QuanLyViecLam.cshtml",dsViecLam);
         }
 
+        [HttpGet]
+        [Route("ThemViecLam")]
+        public IActionResult ThemViecLam()
+        {
+            return View("~/Views/Admin/ThemViecLam.cshtml");
+        }
 
 
     }
