@@ -32,5 +32,6 @@ namespace QLTuyenDung.Models
         public TaiKhoan TaiKhoan { get; set; }
 
 
+
     }
 }

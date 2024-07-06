@@ -1,12 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using QLTuyenDung.DAO;
 
 namespace QLTuyenDung.Controllers
 {
     public class QuanLyViecLamController : Controller
     {
-        public IActionResult Index()
+        private readonly ViecLamDAO _ViecLamdao;
+
+        public QuanLyViecLamController(ViecLamDAO viecLamDAO)
         {
-            return View();
+            _ViecLamdao = viecLamDAO;
         }
+
+        public async Task<IActionResult> Index()
+        {
+            var dsViecLam = await _ViecLamdao.GetAll();
+            return View(dsViecLam);
+        }
+
+
+
     }
 }

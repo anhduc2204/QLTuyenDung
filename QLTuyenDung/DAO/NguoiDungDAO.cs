@@ -12,11 +12,7 @@ namespace QLTuyenDung.DAO
             _dataContext = dataContext;
         }
 
-        public DataContext Get_dataContext()
-        {
-            return _dataContext;
-        }
-
+        
         public async Task<NguoiDung> getByUserNameAndPassWord(string taiKhoan, string matKhau)
         {
             var tk =  await _dataContext.DSTaiKhoan

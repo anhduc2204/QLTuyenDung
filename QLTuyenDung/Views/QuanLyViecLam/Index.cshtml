@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@model IEnumerable<QLTuyenDung.Models.ViecLam>
+@{
+    ViewData["Title"] = "Quản lý tin tuyển dụng";
+    int stt = 1;
+    int dem = 0;
+}
+
+@* <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -24,7 +31,11 @@
                 <a href="#" class="btn btn-outline-secondary ml-2 btn-custom">Đăng ký</a>
             </div>
         </div>
-    </header>
+    </header> *@
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/style.css">
+
 
     <main class="py-4">
         <section class="job-list">
@@ -32,17 +43,17 @@
                 <h1 class="text-center mb-4">Quản lý Việc làm</h1>
                 <div class="d-flex justify-content-center mb-4">
                     <a href="#" class="btn btn-custom mx-2">Tạo tin tuyển dụng mới</a>
-                    <a href="#" class="btn btn-custom mx-2">Sửa</a>
+                    @* <a href="#" class="btn btn-custom mx-2">Sửa</a>
                     <a href="#" class="btn btn-custom mx-2">Xóa</a>
-                    <a href="#" class="btn btn-custom mx-2">Danh sách ứng viên</a>
+                    <a href="#" class="btn btn-custom mx-2">Danh sách ứng viên</a> *@
                 </div>
-                <div class="search-bar mb-4">
+                @* <div class="search-bar mb-4">
                     <input type="text" class="form-control d-inline-block mr-2" placeholder="Tìm kiếm vị trí">
                     <button type="submit" class="btn btn-custom">Tìm kiếm</button>
                 </div>
                 <div class="create-job text-right mb-4">
                     <a href="#" class="btn btn-custom">Tạo vị trí mới</a>
-                </div>
+                </div> *@
                 <table class="table">
                     <thead class="thead-light">
                         <tr>
@@ -51,27 +62,36 @@
                             <th>Ngày hết hạn</th>
                             <th>Mô tả</th>
                             <th>Mức lương</th>
-                            <th>Nơi làm việc</th>
+                            <th>Thao tác</th>
                             <th>Chi tiết</th>
                         </tr>
                     </thead>
                     <tbody>
+                    
+                    @foreach(var vieclam in Model)
+                    {
                         <tr>
-                            <td>1</td>
-                            <td>Ngày bắt đầu 1</td>
-                            <td>Ngày hết hạn 1</td>
-                            <td>Mô tả 1</td>
-                            <td>Mức lương 1</td>
-                            <td>Nơi làm việc 1</td>
-                            <td><a href="#">Chi tiết</a></td>
+                            <td>@stt</td>
+                            <td>@vieclam.NgayTao.ToString("dd/MM/yyyy")</td>
+                            <td>@vieclam.NgayHetHan.ToString("dd/MM/yyyy")</td>
+                            <td>@vieclam.TieuDe</td>
+                            <td>@vieclam.MucLuong</td>
+                            <td>
+                                <a href="#" class="btn btn-custom m2-2">Sửa</a>
+                                <a href="#" class="btn btn-custom me-2">Xóa</a>
+                            </td>
+                            <td><a href="#" class="btn btn-custom">@vieclam.DSDonUT.Count() Đơn ứng tuyển</a></td>
                         </tr>
+                        stt++ ;    
+                    }
+                    
                     </tbody>
                 </table>
             </div>
         </section>
     </main>
 
-    <footer class="bg-light py-4">
+    @*< footer class="bg-light py-4">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 text-left">
@@ -83,9 +103,9 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> *@
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+@* </body>
+</html> *@
