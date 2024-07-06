@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "D:\\nhập môn cnpm\\Source\\QLTuyenDung\\QLTuyenDung\\wwwroot\\css\\TrangChu.css",
+      "PackagePath": "staticwebassets\\css\\TrangChu.css"
+    },
+    {
       "Id": "D:\\nhập môn cnpm\\Source\\QLTuyenDung\\QLTuyenDung\\wwwroot\\css\\grid.css",
       "PackagePath": "staticwebassets\\css\\grid.css"
     },
@@ -8479,6 +8483,10 @@
     {
       "Id": "D:\\nhập môn cnpm\\Source\\QLTuyenDung\\QLTuyenDung\\wwwroot\\icons\\fontawesome-free-6.4.2-web\\fontawesome-free-6.4.2-web\\webfonts\\fa-v4compatibility.woff2",
       "PackagePath": "staticwebassets\\icons\\fontawesome-free-6.4.2-web\\fontawesome-free-6.4.2-web\\webfonts\\fa-v4compatibility.woff2"
+    },
+    {
+      "Id": "D:\\nhập môn cnpm\\Source\\QLTuyenDung\\QLTuyenDung\\wwwroot\\image\\TrangChu.png",
+      "PackagePath": "staticwebassets\\image\\TrangChu.png"
     },
     {
       "Id": "D:\\nhập môn cnpm\\Source\\QLTuyenDung\\QLTuyenDung\\wwwroot\\image\\vng.png",

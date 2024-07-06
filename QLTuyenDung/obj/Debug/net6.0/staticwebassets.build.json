@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "5a9UWWYSbHj2cN2LDtByH7H/WrQo1gI3yNXUAz4KE6o=",
+  "Hash": "JQRDpgGvoeXzfVQzaCLUhV1dK0kd9I6xEhUUMLfHXTg=",
   "Source": "QLTuyenDung",
   "BasePath": "_content/QLTuyenDung",
   "Mode": "Default",
@@ -110,6 +110,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\tuyendung.css"
+    },
+    {
+      "Identity": "D:\\nhập môn cnpm\\Source\\QLTuyenDung\\QLTuyenDung\\wwwroot\\css\\TrangChu.css",
+      "SourceId": "QLTuyenDung",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\nhập môn cnpm\\Source\\QLTuyenDung\\QLTuyenDung\\wwwroot\\",
+      "BasePath": "_content/QLTuyenDung",
+      "RelativePath": "css/TrangChu.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\TrangChu.css"
     },
     {
       "Identity": "D:\\nhập môn cnpm\\Source\\QLTuyenDung\\QLTuyenDung\\wwwroot\\favicon.ico",
@@ -40295,6 +40314,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\icons\\fontawesome-free-6.4.2-web\\fontawesome-free-6.4.2-web\\webfonts\\fa-v4compatibility.woff2"
+    },
+    {
+      "Identity": "D:\\nhập môn cnpm\\Source\\QLTuyenDung\\QLTuyenDung\\wwwroot\\image\\TrangChu.png",
+      "SourceId": "QLTuyenDung",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\nhập môn cnpm\\Source\\QLTuyenDung\\QLTuyenDung\\wwwroot\\",
+      "BasePath": "_content/QLTuyenDung",
+      "RelativePath": "image/TrangChu.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\image\\TrangChu.png"
     },
     {
       "Identity": "D:\\nhập môn cnpm\\Source\\QLTuyenDung\\QLTuyenDung\\wwwroot\\image\\vng.png",
