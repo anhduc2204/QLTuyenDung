@@ -19,5 +19,12 @@ namespace QLTuyenDung.DAO
                 .ToListAsync<ViecLam>();
         }
 
+        public async Task<ViecLam> Save(ViecLam viecLam)
+        {
+            var vl = await _dataContext.DSViecLam.AddAsync(viecLam);
+            await _dataContext.SaveChangesAsync();
+            return vl.Entity;
+        }
+
     }
 }

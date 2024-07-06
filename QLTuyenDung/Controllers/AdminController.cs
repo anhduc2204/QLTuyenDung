@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QLTuyenDung.DAO;
+using QLTuyenDung.Models;
+using QLTuyenDung.Models.ViewModels;
 
 namespace QLTuyenDung.Controllers
 {
@@ -28,6 +30,34 @@ namespace QLTuyenDung.Controllers
         {
             return View("~/Views/Admin/ThemViecLam.cshtml");
         }
+
+        [HttpPost]
+        [Route("ThemViecLam")]
+        public async Task<IActionResult> ThemViecLam(ViecLamViewModel model)
+        {
+            if(!ModelState.IsValid || model.NgayHetHan <= model.NgayTao)
+            {
+                if(model.NgayHetHan <= model.NgayTao)
+                {
+                    ModelState.AddModelError("NgayHetHan", "Ngày hết hạn phải lớn hơn ngày tạo");
+                    return View(model);
+                }
+            }
+            var viecLam = new ViecLam
+            {
+                TieuDe = model.TieuDe,
+                MoTa = model.MoTa,
+                MucLuong = model.MucLuong,
+                NgayTao = model.NgayTao,
+                NgayHetHan = model.NgayHetHan,
+                TrangThai = Convert.ToBoolean(model.TrangThai)
+            };
+            await _ViecLamdao.Save(viecLam);
+
+            return RedirectToAction("QuanLyViecLam");
+        }
+
+
 
 
     }
