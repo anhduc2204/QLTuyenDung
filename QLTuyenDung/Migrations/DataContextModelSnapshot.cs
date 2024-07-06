@@ -240,7 +240,7 @@ namespace QLTuyenDung.Migrations
                         .IsRequired();
 
                     b.HasOne("QLTuyenDung.Models.ViecLam", "ViecLam")
-                        .WithMany()
+                        .WithMany("DSDonUT")
                         .HasForeignKey("iMaViecLam")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -287,6 +287,11 @@ namespace QLTuyenDung.Migrations
                 {
                     b.Navigation("NguoiDung")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("QLTuyenDung.Models.ViecLam", b =>
+                {
+                    b.Navigation("DSDonUT");
                 });
 #pragma warning restore 612, 618
         }

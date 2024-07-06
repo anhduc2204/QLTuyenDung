@@ -3,25 +3,43 @@
 <head>
     <title>@ViewData["Title"] - My ASP.NET Application</title>
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/layout.css"/>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
 </head>
 <body>
     <header class="header">
-        <div class="logo">VNG</div>
-        <nav class="navigation">
-            <ul class="nav-list">
-                <li class="nav-item"><a href="#" class="nav-link">Trang chủ</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Tuyển dụng</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Ứng viên</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Quản lý</a></li>
-            </ul>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand logo" href="#">VNG</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Tuyển dụng</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Hồ sơ</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        @if (Context.Session.GetString("Username") != null)
+                        {
+                            <a class="btn btn-primary me-2" href="/TaiKhoan/Login" role="button"></a>
+                            <a class="btn btn-primary me-2" href="/Account/Logout" role="button">Logout</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-custom me-2" href="/TaiKhoan/Login" role="button">Login</a>
+                            <a class="btn btn-custom" href="/TaiKhoan/Register" role="button">Register</a>
+                        }
+                    </div>
+                </div>
+            </div>
         </nav>
-        <div class="auth-buttons">
-            <button class="auth-button">Đăng nhập</button>
-            <button class="auth-button">Đăng ký</button>
-        </div>
     </header>
     <div class="container">
         @RenderBody()
@@ -81,5 +99,6 @@
             </div>
         </div>
     </footer>
+
 </body>
 </html>

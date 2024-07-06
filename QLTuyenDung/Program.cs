@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using QLTuyenDung.DAO;
 using QLTuyenDung.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,11 +7,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-/*builder.Services.AddDbContext<DataContext>(option =>
+builder.Services.AddDbContext<DataContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-    */
+
+
+builder.Services.AddScoped<ViecLamDAO>(); //Đăng kí DAO
+builder.Services.AddScoped<NguoiDungDAO>();
 
 // Thêm dịch vụ session
 builder.Services.AddSession(options =>
