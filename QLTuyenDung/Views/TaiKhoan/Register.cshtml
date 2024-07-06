@@ -6,7 +6,7 @@
     Layout = null;
 }
 
-<!DOCTYPE html>
+@* <!DOCTYPE html>
     <html>
     <head>
         <title>Đăng ký</title>
@@ -14,4 +14,83 @@
     <body>
         <h1>Welcom Register</h1>
     </body>
-    </html>
+    </html> *@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container-fluid {
+            height: 100vh;
+        }
+
+        .bg-image-container {
+            position: relative;
+            height: 100%;
+            overflow: hidden;
+        }
+
+            .bg-image-container img {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .register-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+            .register-form form {
+                width: 100%;
+                max-width: 400px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row h-100">
+            @* <div class="col-md-6 bg-image"></div> *@
+            <div class="col-md-6 bg-image-container">
+                <img src="~/img/VNG_DangKy.jpg" alt="Background Image">
+            </div>
+            <div class="col-md-6 register-form">
+                <form>
+                    <h2 class="text-center">Đăng ký</h2>
+                    <div class="form-group">
+                        <label for="name">Họ và Tên</label>
+                        <input type="text" class="form-control" id="name" placeholder="Họ và Tên" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mật khẩu</label>
+                        <input type="password" class="form-control" id="password" placeholder="Mật khẩu" required>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Đăng ký</button>
+                    <button type="button" class="btn btn-danger btn-block">Đăng nhập bằng Google</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
