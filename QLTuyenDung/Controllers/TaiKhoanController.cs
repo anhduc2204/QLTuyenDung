@@ -55,9 +55,9 @@ namespace QLTuyenDung.Controllers
                 }
 
                 return RedirectToAction("Index", "Home");
-            }  
-
-            return View();
+            }
+            ViewBag.Message = "Tài khoản hoặc mật khẩu không chính xác";
+            return View(loginViewModel);
  
              
         }
