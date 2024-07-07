@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Newtonsoft.Json
+
+<!DOCTYPE html
 <html>
 <head>
     <title>@ViewData["Title"] - My ASP.NET Application</title>
@@ -16,26 +18,41 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="@Url.Action("Index","TuyenDung")">Tuyển dụng</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Hồ sơ</a>
-                        </li>
+                    @{
+                        var quyen = Context.Session.GetString("QuyenHan");
+                        if (quyen == null || !quyen.ToString().Equals("Admin"))
+                        {
+                            
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="@Url.Action("Index","TuyenDung")">Tuyển dụng</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="#">Hồ sơ</a>
+                                </li>
+                            
+                        }
+                    }
                     </ul>
+                    
+                    
                     <div class="d-flex">
-                        @if (Context.Session.GetString("Username") != null)
-                        {
-                            <a class="btn btn-primary me-2" href="/TaiKhoan/Login" role="button"></a>
-                            <a class="btn btn-primary me-2" href="/Account/Logout" role="button">Logout</a>
+                        @{
+                            var ndjson = Context.Session.GetString("NguoiDung");
+                            if (ndjson != null)
+                            {
+                                var nguoiDung = JsonConvert.DeserializeObject<NguoiDung>(ndjson);
+                                <a class="btn btn-primary me-2" href="/TaiKhoan/Login" role="button">@nguoiDung.TenND</a>
+                                <a class="btn btn-primary me-2" href="/Account/Logout" role="button">Logout</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-danger me-2" href="/TaiKhoan/Login" role="button">Login</a>
+                                <a class="btn btn-danger" href="/TaiKhoan/Register" role="button">Register</a>
+                            }
                         }
-                        else
-                        {
-                            <a class="btn btn-danger me-2" href="/TaiKhoan/Login" role="button">Login</a>
-                            <a class="btn btn-danger" href="/TaiKhoan/Register" role="button">Register</a>
-                        }
+                        
                     </div>
                 </div>
             </div>

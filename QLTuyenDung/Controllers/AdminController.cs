@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using QLTuyenDung.DAO;
 using QLTuyenDung.Models;
 using QLTuyenDung.Models.ViewModels;
@@ -20,6 +21,18 @@ namespace QLTuyenDung.Controllers
         [Route("")]
         public async Task<IActionResult> QuanLyViecLam()
         {
+            var ndjson = HttpContext.Session.GetString("NguoiDung");
+
+            if (ndjson == null)
+            {
+                return RedirectToAction("Login", "TaiKhoan");
+            }
+            var nguoiDung = JsonConvert.DeserializeObject<NguoiDung>(ndjson);
+            var quyen = HttpContext.Session.GetString("QuyenHan");
+            if (quyen == null || !quyen.Equals("Admin"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var dsViecLam = await _ViecLamdao.GetAll();
             return View("~/Views/Admin/QuanLyViecLam.cshtml",dsViecLam);
         }
@@ -28,6 +41,18 @@ namespace QLTuyenDung.Controllers
         [Route("ThemViecLam")]
         public IActionResult ThemViecLam()
         {
+            var ndjson = HttpContext.Session.GetString("NguoiDung");
+
+            if (ndjson == null)
+            {
+                return RedirectToAction("Login", "TaiKhoan");
+            }
+            var nguoiDung = JsonConvert.DeserializeObject<NguoiDung>(ndjson);
+            var quyen = HttpContext.Session.GetString("QuyenHan");
+            if (quyen == null || !quyen.Equals("Admin"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View("~/Views/Admin/ThemViecLam.cshtml");
         }
 

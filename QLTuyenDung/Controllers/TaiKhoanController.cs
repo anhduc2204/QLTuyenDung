@@ -14,10 +14,12 @@ namespace QLTuyenDung.Controllers
         }*/
 
         private readonly NguoiDungDAO _NDdao;
+        private readonly TaiKhoanDAO _TaiKhoanDAO;
 
-        public TaiKhoanController(NguoiDungDAO nguoiDungDAO)
+        public TaiKhoanController(NguoiDungDAO nguoiDungDAO, TaiKhoanDAO taiKhoanDAO)
         {
             _NDdao = nguoiDungDAO;
+            _TaiKhoanDAO = taiKhoanDAO;
         }
 
         [HttpGet]
@@ -36,11 +38,22 @@ namespace QLTuyenDung.Controllers
             {
                 return ViewBag.Message = "Yêu cầu nhập đầy đủ thông tin!"; 
             }
-            NguoiDung nd = await Authenticate(email, matKhau);
-            if (nd != null)
+            var tk = await Authenticate(email, matKhau);
+            if (tk != null)
             {
-                var NDJson = JsonConvert.SerializeObject(nd);
-                HttpContext.Session.SetString("nguoiDung", NDJson);
+                NguoiDung nd = tk.NguoiDung;
+                var ndJson = JsonConvert.SerializeObject(nd, Formatting.None,
+                                            new JsonSerializerSettings()
+                                            {
+                                                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                                            });
+                HttpContext.Session.SetString("NguoiDung", ndJson);
+                HttpContext.Session.SetString("QuyenHan", tk.QuyenHan.TenQuyen);
+                if (tk.QuyenHan.TenQuyen.Equals("Admin"))
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
+                
                 return RedirectToAction("Index", "Home");
             }  
 
@@ -61,9 +74,9 @@ namespace QLTuyenDung.Controllers
             return View();
         }
 
-        public Task<NguoiDung> Authenticate(string email, string matKhau)
+        public Task<TaiKhoan> Authenticate(string email, string matKhau)
         {
-            return _NDdao.getByUserNameAndPassWord(email, matKhau);
+            return _TaiKhoanDAO.getByUserNameAndPassWord(email, matKhau);
             
         }
 

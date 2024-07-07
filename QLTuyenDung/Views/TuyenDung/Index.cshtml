@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<QLTuyenDung.Models.ViecLam>
+
+@{
     ViewData["Title"] = "Tuyển dụng";
 }
 
@@ -17,65 +19,36 @@
             <h2>Thông tin việc làm</h2>
             <div class="grid wide">
                 <div class="job-list">
-                    <div class="job-card">
-                        <div class="job-header">
-                            <div class="job-header-title">
-                                SOFTWARE ENGINEER, DIGITAL BUSINESS
-                            </div>
-                            @* <div class="job-header-location">
-                                <i class="fa-solid fa-location-dot location-icon"></i>
-                                <p class="header-title">Hà Nội</p>
-                            </div> *@
-                        </div>
-                        <div class="job-description">
-                            <div class="job-description-title">
-                                <p class="description-title">We are currently seeking an experienced Front-End Developer with a strong background in React and TypeScript to join our AI Product team.</p>
-                            </div>
-                            <div class="job-description-quanity">
-                                <span class="description-quanity">Mức lương: 66666666</span>
-                            </div>
-                        </div>
-                        <div class="job-details">
-                            <div class="job-details-apply">
-                                <div class="details-apply-deadline">
-                                    <span class="apply-deadline">Hạn nộp: 01-07-2024</span>
-                                </div>
-                                <div class="details-apply-btn">
-                                    <button class="btn-apply">Ứng tuyển</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
+                @foreach(var viecLam in Model)
+                {
                     <div class="job-card">
                         <div class="job-header">
                             <div class="job-header-title">
-                                SOFTWARE ENGINEER, DIGITAL BUSINESS
+                                @viecLam.TieuDe
                             </div>
-                            @* <div class="job-header-location">
-                                <i class="fa-solid fa-location-dot location-icon"></i>
-                                <p class="header-title">Hà Nội</p>
-                            </div> *@
                         </div>
                         <div class="job-description">
                             <div class="job-description-title">
-                                <p class="description-title">We are currently seeking an experienced Front-End Developer with a strong background in React and TypeScript to join our AI Product team.</p>
+                                <p class="description-title">@viecLam.MoTa</p>
                             </div>
                             <div class="job-description-quanity">
-                                <span class="description-quanity">Mức lương: 45666666</span>
+                                <span class="description-quanity">Mức lương: @viecLam.MucLuong</span>
                             </div>
                         </div>
                         <div class="job-details">
                             <div class="job-details-apply">
                                 <div class="details-apply-deadline">
-                                    <span class="apply-deadline">Hạn nộp: 01-07-2024</span>
+                                    <span class="apply-deadline">Hạn nộp: @viecLam.NgayHetHan.ToString("dd/MM/yyyy")</span>
                                 </div>
                                 <div class="details-apply-btn">
-                                    <button class="btn-apply">Ứng tuyển</button>
+                                    <a class="btn btn-apply" href="@Url.Action("Ungtuyen", "TuyenDung")">Ứng tuyển</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                }
+
                 </div>
             </div>
         </section>
