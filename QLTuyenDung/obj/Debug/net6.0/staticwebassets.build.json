@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "JQRDpgGvoeXzfVQzaCLUhV1dK0kd9I6xEhUUMLfHXTg=",
+  "Hash": "+s1tF1TNG/l3xKJp6zg52IbxxWM3S256D14rLK7j8jM=",
   "Source": "QLTuyenDung",
   "BasePath": "_content/QLTuyenDung",
   "Mode": "Default",
@@ -40352,6 +40352,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\image\\vng.png"
+    },
+    {
+      "Identity": "D:\\nhập môn cnpm\\Source\\QLTuyenDung\\QLTuyenDung\\wwwroot\\image\\VNG_DangKy.jpg",
+      "SourceId": "QLTuyenDung",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\nhập môn cnpm\\Source\\QLTuyenDung\\QLTuyenDung\\wwwroot\\",
+      "BasePath": "_content/QLTuyenDung",
+      "RelativePath": "image/VNG_DangKy.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\image\\VNG_DangKy.jpg"
     },
     {
       "Identity": "D:\\nhập môn cnpm\\Source\\QLTuyenDung\\QLTuyenDung\\wwwroot\\js\\site.js",
