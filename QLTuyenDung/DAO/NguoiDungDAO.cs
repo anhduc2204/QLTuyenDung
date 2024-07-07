@@ -30,6 +30,13 @@ namespace QLTuyenDung.DAO
 
         }
 
+        public async Task<NguoiDung> Save(NguoiDung nguoiDung)
+        {
+            var nd = await _dataContext.DSNguoiDung.AddAsync(nguoiDung);
+            await _dataContext.SaveChangesAsync();
+            return nd.Entity;
+        }
+
 
 
 

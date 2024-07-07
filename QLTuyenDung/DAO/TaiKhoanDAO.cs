@@ -23,5 +23,22 @@ namespace QLTuyenDung.DAO
             return tk;
         }
 
+        public async Task<TaiKhoan> Save(TaiKhoan taiKhoan)
+        {
+            var tk = await _dataContext.DSTaiKhoan.AddAsync(taiKhoan);
+            await _dataContext.SaveChangesAsync();
+            
+            if (tk != null && tk.State == EntityState.Added)
+            {
+                // Đối tượng TaiKhoan đã được thêm và lưu xuống cơ sở dữ liệu
+                return tk.Entity;
+            }
+            else
+            {
+                // Xử lý khi không thể thêm hoặc lưu đối tượng TaiKhoan
+                throw new InvalidOperationException("Không thể thêm hoặc lưu đối tượng TaiKhoan.");
+            }
+        }
+
     }
 }
