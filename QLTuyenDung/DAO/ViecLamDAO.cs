@@ -26,5 +26,11 @@ namespace QLTuyenDung.DAO
             return vl.Entity;
         }
 
+        public async Task<ViecLam> GetByID(int id)
+        {
+            return await _dataContext.DSViecLam.FindAsync(id);
+            
+        }
+
     }
 }

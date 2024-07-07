@@ -15,6 +15,7 @@ builder.Services.AddDbContext<DataContext>(option =>
 
 builder.Services.AddScoped<ViecLamDAO>(); //Đăng kí DAO
 builder.Services.AddScoped<NguoiDungDAO>();
+builder.Services.AddScoped<UngTuyenDAO>();
 
 // Thêm dịch vụ session
 builder.Services.AddSession(options =>

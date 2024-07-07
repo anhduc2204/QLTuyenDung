@@ -23,8 +23,14 @@ namespace QLTuyenDung.DAO
             
          
         }
-            
-        
+
+        public async Task<NguoiDung> GetByID(int id)
+        {
+            return await _dataContext.DSNguoiDung.FindAsync(id);
+
+        }
+
+
 
 
     }
