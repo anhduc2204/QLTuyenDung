@@ -30,7 +30,7 @@ namespace QLTuyenDung.Controllers
         [HttpGet]
         public IActionResult UngTuyen()
         {
-            var NDJson = HttpContext.Session.GetString("nguoiDung");
+            var NDJson = HttpContext.Session.GetString("NguoiDung");
 
             if (NDJson == null)
             {

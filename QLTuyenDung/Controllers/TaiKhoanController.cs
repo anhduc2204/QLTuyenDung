@@ -41,30 +41,25 @@ namespace QLTuyenDung.Controllers
             var tk = await Authenticate(email, matKhau);
             if (tk != null)
             {
-                
+                NguoiDung nd = tk.NguoiDung;
+                var ndJson = JsonConvert.SerializeObject(nd, Formatting.None,
+                                            new JsonSerializerSettings()
+                                            {
+                                                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                                            });
+                HttpContext.Session.SetString("NguoiDung", ndJson);
+                HttpContext.Session.SetString("QuyenHan", tk.QuyenHan.TenQuyen);
+                if (tk.QuyenHan.TenQuyen.Equals("Admin"))
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
+
+                return RedirectToAction("Index", "Home");
             }  
 
             return View();
  
              
-        }
-
-        public IActionResult DangNhap(TaiKhoan tk)
-        {
-            NguoiDung nd = tk.NguoiDung;
-            var ndJson = JsonConvert.SerializeObject(nd, Formatting.None,
-                                        new JsonSerializerSettings()
-                                        {
-                                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                                        });
-            HttpContext.Session.SetString("NguoiDung", ndJson);
-            HttpContext.Session.SetString("QuyenHan", tk.QuyenHan.TenQuyen);
-            if (tk.QuyenHan.TenQuyen.Equals("Admin"))
-            {
-                return RedirectToAction("Index", "Admin");
-            }
-
-            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -74,14 +69,15 @@ namespace QLTuyenDung.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(RegisterViewModel registerViewModel)
+        public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
         {
             string hoTen = registerViewModel.HoTen.Trim();
             string email = registerViewModel.Email.Trim();
             string matKhau = registerViewModel.MatKhau.Trim();
 
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || !XacThucEmail(email))
             {
+                ModelState.AddModelError("Email", "Email đã tồn tại");
                 return View(registerViewModel);
                 ViewBag.Message = "Không hợp lệ";
             }
@@ -90,7 +86,7 @@ namespace QLTuyenDung.Controllers
             {
                 TenTaiKhoan = registerViewModel.Email,
                 MatKhau = registerViewModel.MatKhau,
-                QuyenHan = new QuyenHan{ MaQuyen = 1 },
+                iMaQuyen = 2, 
                 NguoiDung = new NguoiDung
                 {
                     Email = registerViewModel.Email,
@@ -98,14 +94,23 @@ namespace QLTuyenDung.Controllers
                 }
                 
             };
-            var tkCheck = _TaiKhoanDAO.Save(tk);
+            var tkCheck = await _TaiKhoanDAO.Save(tk);
             if(tkCheck == null)
             {
                 ViewBag.Message = "Không thành công, thử lại sau!";
                 return View(registerViewModel);
             }
-            return View();
+            return View("Login");
+
+            
            
+        }
+
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
 
         public Task<TaiKhoan> Authenticate(string email, string matKhau)
@@ -114,7 +119,14 @@ namespace QLTuyenDung.Controllers
             
         }
 
-        
+        public Boolean XacThucEmail(string email)
+        {
+            if(_TaiKhoanDAO.getByEmail(email) != null)
+            {
+                return false;
+            }
+            return true;
+        }
 
     }
 }
