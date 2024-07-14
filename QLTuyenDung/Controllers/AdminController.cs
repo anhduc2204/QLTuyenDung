@@ -82,8 +82,34 @@ namespace QLTuyenDung.Controllers
             return RedirectToAction("QuanLyViecLam");
         }
 
+		[HttpGet]
+		[Route("ThongBao")]
+		public IActionResult ThongBao()
+		{
+			/*var ndjson = HttpContext.Session.GetString("NguoiDung");
+			if (ndjson == null)
+			{
+				return RedirectToAction("Login", "TaiKhoan");
+			}*/
+			return View();
+		}
 
-
+        [HttpPost]
+        [Route("ThongBao")]
+        public async Task<IActionResult> ThongBao(ThongBaoViewModel model)
+        {
+            int check = await Utils.MailUtils.GuiThongBao(model.ToEmail.Trim(), model.Subject.Trim(), model.Message.Trim());
+            ViewBag.MessageCode = check;
+            if(check == 1)
+            {
+                ViewBag.Message = "Gửi thành công";
+            }
+            else
+            {
+                ViewBag.Message = "Gửi thất bại";
+            }
+            return View(model);
+        }
 
     }
 }
