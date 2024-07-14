@@ -3,6 +3,8 @@ using Newtonsoft.Json;
 using QLTuyenDung.DAO;
 using QLTuyenDung.Models;
 using QLTuyenDung.Models.ViewModels;
+using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 
 namespace QLTuyenDung.Controllers
 {
@@ -65,8 +67,10 @@ namespace QLTuyenDung.Controllers
                 if(model.NgayHetHan <= model.NgayTao)
                 {
                     ModelState.AddModelError("NgayHetHan", "Ngày hết hạn phải lớn hơn ngày tạo");
-                    return View(model);
+                    
                 }
+
+                return View(model);
             }
             var viecLam = new ViecLam
             {
@@ -82,6 +86,7 @@ namespace QLTuyenDung.Controllers
             return RedirectToAction("QuanLyViecLam");
         }
 
+        
 
 
 
