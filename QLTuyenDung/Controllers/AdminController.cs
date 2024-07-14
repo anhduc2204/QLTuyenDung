@@ -9,11 +9,16 @@ namespace QLTuyenDung.Controllers
     [Route("Admin/")]
     public class AdminController : Controller
     {
-        private readonly ViecLamDAO _ViecLamdao;
+        private readonly ViecLamDAO _viecLamDAO;
+        private readonly NguoiDungDAO _nguoiDungDAO;
+        private readonly UngTuyenDAO _ungTuyenDAO;
 
-        public AdminController(ViecLamDAO viecLamDAO)
+        public AdminController(ViecLamDAO viecLamDAO, NguoiDungDAO nguoiDungDAO, UngTuyenDAO ungTuyenDAO)
         {
-            _ViecLamdao = viecLamDAO;
+            _viecLamDAO = viecLamDAO;
+            _nguoiDungDAO = nguoiDungDAO;
+            _ungTuyenDAO = ungTuyenDAO;
+
         }
 
         [HttpGet]
@@ -33,7 +38,7 @@ namespace QLTuyenDung.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            var dsViecLam = await _ViecLamdao.GetAll();
+            var dsViecLam = await _viecLamDAO.GetAll();
             return View("~/Views/Admin/QuanLyViecLam.cshtml",dsViecLam);
         }
 
@@ -77,27 +82,63 @@ namespace QLTuyenDung.Controllers
                 NgayHetHan = model.NgayHetHan,
                 TrangThai = Convert.ToBoolean(model.TrangThai)
             };
-            await _ViecLamdao.Save(viecLam);
+            await _viecLamDAO.Save(viecLam);
 
             return RedirectToAction("QuanLyViecLam");
         }
 
+        [HttpGet]
+        [Route("QuanLyUngTuyen/{id_vieclam}")]
+        public async Task<IActionResult> QuanLyUngTuyen(int id_vieclam)
+        {
+            List<DonUngTuyen> DSDon = _ungTuyenDAO.getDonByMaViecLam(id_vieclam);
+            ViecLam viecLam = await _viecLamDAO.GetByID(id_vieclam);
+            List<UngTuyenViewModel> _UngTuyenViews = new List<UngTuyenViewModel>();
+            foreach(DonUngTuyen don in DSDon)
+            {
+                var ungTuyenView = new UngTuyenViewModel
+                {
+                    HoTen = don.NguoiDung.TenND,
+                    Email = don.NguoiDung.Email,
+                    SDT = don.NguoiDung.SDT,
+                    NgaySinh = don.NguoiDung.NgaySinh,
+                    MoTa = don.MoTa
+                };
+                _UngTuyenViews.Add(ungTuyenView);
+
+            }
+            QuanLyUngTuyenViewModel model = new QuanLyUngTuyenViewModel {
+                TieuDe = viecLam.TieuDe,
+                MoTa = viecLam.MoTa,
+                MucLuong = viecLam.MucLuong,
+                UngTuyenViews = _UngTuyenViews
+            };
+
+            return View(model); 
+        }
+
+
 		[HttpGet]
-		[Route("ThongBao")]
-		public IActionResult ThongBao()
+		[Route("ThongBao/{id_nd}")]
+		public async Task<IActionResult> ThongBao(int id_nd)
 		{
-			/*var ndjson = HttpContext.Session.GetString("NguoiDung");
-			if (ndjson == null)
-			{
-				return RedirectToAction("Login", "TaiKhoan");
-			}*/
-			return View();
+            var ndjson = HttpContext.Session.GetString("NguoiDung");
+            if (ndjson == null)
+            {
+                return RedirectToAction("Login", "TaiKhoan");
+            }
+
+            NguoiDung nd  = await _nguoiDungDAO.GetByID(id_nd);
+            ThongBaoViewModel model = new ThongBaoViewModel();
+            model.ToEmail = nd.Email;
+            return View(model);
 		}
 
         [HttpPost]
         [Route("ThongBao")]
         public async Task<IActionResult> ThongBao(ThongBaoViewModel model)
         {
+
             int check = await Utils.MailUtils.GuiThongBao(model.ToEmail.Trim(), model.Subject.Trim(), model.Message.Trim());
             ViewBag.MessageCode = check;
             if(check == 1)

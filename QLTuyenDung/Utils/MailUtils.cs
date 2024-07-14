@@ -8,7 +8,7 @@ namespace QLTuyenDung.Utils
     {
         public static async Task<int> GuiThongBao(string _to, string _subject, string _body)
         {
-			_body = _body.Replace("\r\n", "<br>");
+			_body = _body.Replace("\r\n", "<br/>");
 			string _from = "vngtuyendungg21@gmail.com";
             string _password = "uhafjshtxyhbmkur";
 			MailMessage mailMessage = new MailMessage(_from, _to, _subject, _body);
