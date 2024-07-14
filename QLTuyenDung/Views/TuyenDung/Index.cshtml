@@ -42,7 +42,7 @@
                                     <span class="apply-deadline">Hạn nộp: @viecLam.NgayHetHan.ToString("dd/MM/yyyy")</span>
                                 </div>
                                 <div class="details-apply-btn">
-                                    <a class="btn btn-apply" href="@Url.Action("Ungtuyen", "TuyenDung")">Ứng tuyển</a>
+                                    <a class="btn btn-apply" href="@Url.Action("UngTuyen", "TuyenDung", new { id_vieclam = viecLam.MaViecLam })">Ứng tuyển</a>
                                 </div>
                             </div>
                         </div>

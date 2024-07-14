@@ -26,7 +26,6 @@ namespace QLTuyenDung.Models
         [Column("sGioiTinh"), StringLength(10)]
         public string? GioiTinh {  set; get; }
 
-
         public int iMaTaiKhoan { get; set; }
 
         [JsonIgnore]
