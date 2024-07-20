@@ -58,8 +58,7 @@ namespace QLTuyenDung.Controllers
             }
             ViewBag.Message = "Tài khoản hoặc mật khẩu không chính xác";
             return View(loginViewModel);
- 
-             
+            
         }
 
         [HttpGet]
@@ -75,7 +74,9 @@ namespace QLTuyenDung.Controllers
             string email = registerViewModel.Email.Trim();
             string matKhau = registerViewModel.MatKhau.Trim();
 
-            if (!ModelState.IsValid || !XacThucEmail(email))
+            Boolean checkEmail = await XacThucEmail(email);
+
+            if (!ModelState.IsValid || !checkEmail)
             {
                 ModelState.AddModelError("Email", "Email đã tồn tại");
                 return View(registerViewModel);
@@ -119,9 +120,10 @@ namespace QLTuyenDung.Controllers
             
         }
 
-        public Boolean XacThucEmail(string email)
+        public async Task<Boolean> XacThucEmail(string email)
         {
-            if(_TaiKhoanDAO.getByEmail(email) != null)
+            TaiKhoan tk = await _TaiKhoanDAO.getByEmail(email);
+            if (tk != null)
             {
                 return false;
             }

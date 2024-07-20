@@ -137,7 +137,6 @@ namespace QLTuyenDung.Controllers
 		}
 
         [HttpPost]
-        
         public async Task<IActionResult> ThongBao(ThongBaoViewModel model)
         {
 
