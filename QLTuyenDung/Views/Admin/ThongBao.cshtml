@@ -12,7 +12,7 @@
 <main class="container-sm py-4">
 	<div class="card col-8 mx-auto">
 		<div class="card-body">
-			<form asp-action="ThongBao" method="post">
+			<form asp-action="ThongBao" asp-route-id_nd="@ViewBag.id_nd">
 				<div class="mb-3 col-3">
 					<label class="form-label">Email nhận</label>
 					<input asp-for="ToEmail" type="email" class="form-control">

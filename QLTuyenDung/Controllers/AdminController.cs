@@ -133,12 +133,19 @@ namespace QLTuyenDung.Controllers
             NguoiDung nd  = await _nguoiDungDAO.GetByID(id_nd);
             ThongBaoViewModel model = new ThongBaoViewModel();
             model.ToEmail = nd.Email;
+            ViewBag.id_nd = id_nd;
             return View(model);
 		}
 
         [HttpPost]
-        public async Task<IActionResult> ThongBao(ThongBaoViewModel model)
+        [Route("ThongBao/{id_nd}")]
+        public async Task<IActionResult> ThongBao(int id_nd,ThongBaoViewModel model)
         {
+            ViewBag.id_nd = id_nd;
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
             int check = await Utils.MailUtils.GuiThongBao(model.ToEmail.Trim(), model.Subject.Trim(), model.Message.Trim());
             ViewBag.MessageCode = check;
