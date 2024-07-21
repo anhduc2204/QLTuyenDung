@@ -38,7 +38,12 @@ namespace QLTuyenDung.DAO
         }
 
 
-
+        public NguoiDung Update(NguoiDung nguoiDung)
+        {
+            var nd = _dataContext.DSNguoiDung.Update(nguoiDung);
+            _dataContext.SaveChanges();
+            return nd.Entity;
+        }
 
     }
 }

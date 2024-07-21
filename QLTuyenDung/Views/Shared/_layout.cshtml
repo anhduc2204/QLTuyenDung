@@ -28,8 +28,16 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="@Url.Action("Index","TuyenDung")">Tuyển dụng</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">Hồ sơ</a>
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Tài khoản
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
+                                        <li><a class="dropdown-item" href="#">Thông tin cá nhân</a></li>
+                                        
+                                    </ul>
                                 </li>
                             
                         }
@@ -116,6 +124,9 @@
             </div>
         </div>
     </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
 </body>
 

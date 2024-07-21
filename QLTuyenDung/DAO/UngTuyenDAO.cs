@@ -1,4 +1,5 @@
-﻿using QLTuyenDung.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using QLTuyenDung.Models;
 
 namespace QLTuyenDung.DAO
 {
@@ -16,7 +17,15 @@ namespace QLTuyenDung.DAO
             _dataContext.SaveChanges();
             return don.Entity;
         }
-            
+        
+        public List<DonUngTuyen> getDonByMaViecLam(int maViecLam)
+        {
+            var list = _dataContext.DSDonUT
+            .Include(d => d.NguoiDung)
+            .Where(d => d.iMaViecLam == maViecLam)
+            .ToList();
+            return list;
+        }
         
     }
 }

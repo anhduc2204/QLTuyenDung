@@ -14,6 +14,8 @@ namespace QLTuyenDung.Models.ViewModels
         [Required,RegularExpression(@"^\d+$", ErrorMessage = "Số điện thoại chỉ được chứa các chữ số.")]
         public string SDT {get; set; }
 
+        [Required]
+        public DateTime? NgaySinh { get; set; }
 
         [Required]
         public int MaViecLam { get; set; }

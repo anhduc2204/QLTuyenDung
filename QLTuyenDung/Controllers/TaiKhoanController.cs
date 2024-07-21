@@ -77,34 +77,40 @@ namespace QLTuyenDung.Controllers
 
             if (!ModelState.IsValid || !XacThucEmail(email))
             {
-                ModelState.AddModelError("Email", "Email đã tồn tại");
+                if (!ModelState.IsValid)
+                {
+                    ViewBag.Message = "Thông tin không hợp lệ.";
+                }
+                else
+                {
+                    ModelState.AddModelError("Email", "Email đã tồn tại");
+                }
                 return View(registerViewModel);
-                ViewBag.Message = "Không hợp lệ";
             }
 
             TaiKhoan tk = new TaiKhoan
             {
                 TenTaiKhoan = registerViewModel.Email,
                 MatKhau = registerViewModel.MatKhau,
-                iMaQuyen = 2, 
+                iMaQuyen = 2,
                 NguoiDung = new NguoiDung
                 {
                     Email = registerViewModel.Email,
                     TenND = registerViewModel.HoTen
                 }
-                
             };
+
             var tkCheck = await _TaiKhoanDAO.Save(tk);
-            if(tkCheck == null)
+            if (tkCheck == null)
             {
                 ViewBag.Message = "Không thành công, thử lại sau!";
                 return View(registerViewModel);
             }
-            return View("Login");
 
-            
-           
+            ViewBag.Message = "Đăng ký thành công!";
+            return RedirectToAction("Login");
         }
+
 
         [HttpGet]
         public IActionResult Logout()
@@ -121,11 +127,8 @@ namespace QLTuyenDung.Controllers
 
         public Boolean XacThucEmail(string email)
         {
-            if(_TaiKhoanDAO.getByEmail(email) != null)
-            {
-                return false;
-            }
-            return true;
+            var tk = _TaiKhoanDAO.getByEmail(email).Result;
+            return tk == null;
         }
 
     }
