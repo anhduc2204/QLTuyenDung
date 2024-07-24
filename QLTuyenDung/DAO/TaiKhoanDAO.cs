@@ -52,5 +52,14 @@ namespace QLTuyenDung.DAO
             return tk.Entity;
         }
 
-    }
+		public async Task<TaiKhoan> GetByID(int id)
+		{
+			return await _dataContext.DSTaiKhoan
+                            .Include(t => t.NguoiDung)
+                            .Include(t => t.QuyenHan)
+							.FirstOrDefaultAsync(t => t.MaTaiKhoan == id);
+
+		}
+
+	}
 }

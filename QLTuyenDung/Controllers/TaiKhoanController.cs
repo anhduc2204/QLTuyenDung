@@ -202,13 +202,80 @@ namespace QLTuyenDung.Controllers
 			ViewBag.Message = "Cập nhật thất bại";
 			return View("ThongTinTaiKhoan", taiKhoan);
 
-
-
 		}
 
 
+		[HttpGet]
+		public IActionResult ThongTinCaNhan()
+		{
+			//Kiểm tra xem có người dùng nào đăng nhập không
+			var ndjson = HttpContext.Session.GetString("NguoiDung");
+			if (ndjson == null)
+			{
+				return RedirectToAction("Login", "TaiKhoan");
+			}
+			// có đăng nhập: lấy ra nguoiDung (ở dạng Json), convert sang thành đối tượng NguoiDung
+			var nguoiDung = JsonConvert.DeserializeObject<NguoiDung>(ndjson);
+			return View(nguoiDung);
+		}
 
-        public async Task<Boolean> XacThucEmail(string email)
+		[HttpPost]
+		public async Task<IActionResult> CapNhatThongTinCaNhan(NguoiDung nguoiDung_New)
+		{
+			//Kiểm tra xem có người dùng nào đăng nhập không
+			var ndjson = HttpContext.Session.GetString("NguoiDung");
+			if (ndjson == null)
+			{
+				return RedirectToAction("Login", "TaiKhoan");
+			}
+			// có đăng nhập: lấy ra nguoiDung (ở dạng Json), convert sang thành đối tượng NguoiDung
+			var nguoiDung = JsonConvert.DeserializeObject<NguoiDung>(ndjson);
+            nguoiDung.TenND = nguoiDung_New.TenND;
+            nguoiDung.Email = nguoiDung_New.Email;
+            nguoiDung.SDT = nguoiDung_New.SDT;
+            nguoiDung.NgaySinh = nguoiDung_New.NgaySinh;
+            nguoiDung.GioiTinh = nguoiDung_New.GioiTinh;
+
+            int check = 0;
+            // Cập nhật
+            var nd = _NDdao.Update(nguoiDung);
+
+            if (nd != null) {
+
+				//cập nhật đối tượng người dùng mới trong Session
+				HttpContext.Session.Clear();
+				var ndJson_New = JsonConvert.SerializeObject(nd, Formatting.None,
+											new JsonSerializerSettings()
+											{
+												ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+											});
+				HttpContext.Session.SetString("NguoiDung", ndJson_New);
+
+				//Đồng thời cập nhật lại tên tài khoản
+				var taiKhoan = await _TaiKhoanDAO.GetByID(nd.iMaTaiKhoan);
+                taiKhoan.TenTaiKhoan = nd.Email;
+                var tk = _TaiKhoanDAO.Update(taiKhoan);
+
+                if (tk != null) {
+                    check = 1;
+                }
+                else
+                {
+                    check = 0;
+                }
+
+            }
+
+            ViewBag.MessageCode = check;
+            if (check == 1) {
+                ViewBag.Message = "Cập nhật thành công";
+                return View("ThongTinCaNhan", nd);
+            }
+			ViewBag.Message = "Cập nhật không thành công";
+			return View("ThongTinCaNhan", nguoiDung);
+		}
+
+		public async Task<Boolean> XacThucEmail(string email)
         {
             TaiKhoan tk = await _TaiKhoanDAO.getByEmail(email);
             if (tk != null)
