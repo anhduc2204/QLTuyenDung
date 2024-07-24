@@ -38,11 +38,19 @@ namespace QLTuyenDung.DAO
         public async Task<TaiKhoan> getByEmail(string email)
         {
             var tk = await _dataContext.DSTaiKhoan
-                                        .FirstOrDefaultAsync(t => t.TenTaiKhoan == email);
+										.Include(t => t.NguoiDung)
+                                        .Include(t => t.QuyenHan)
+										.FirstOrDefaultAsync(t => t.TenTaiKhoan == email);
 
             return tk;
         }
 
+        public TaiKhoan Update(TaiKhoan taiKhoan)
+        {
+            var tk = _dataContext.DSTaiKhoan.Update(taiKhoan);
+            _dataContext.SaveChanges();
+            return tk.Entity;
+        }
 
     }
 }

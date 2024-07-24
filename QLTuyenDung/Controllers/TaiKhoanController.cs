@@ -120,6 +120,94 @@ namespace QLTuyenDung.Controllers
             
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ThongTinTaiKhoan()
+        {
+            //Kiểm tra xem có người dùng nào đăng nhập không
+            var ndjson = HttpContext.Session.GetString("NguoiDung");
+            if (ndjson == null)
+            {
+                return RedirectToAction("Login", "TaiKhoan");
+            }
+            // có đăng nhập: lấy ra nguoiDung (ở dạng Json), convert sang thành đối tượng NguoiDung
+            var nguoiDung = JsonConvert.DeserializeObject<NguoiDung>(ndjson);
+
+            TaiKhoan taiKhoan = await _TaiKhoanDAO.getByEmail(nguoiDung.Email);
+
+            return View(taiKhoan);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CapNhatTaiKhoan(TaiKhoan taiKhoanNew)
+        {
+            //Kiểm tra xem có người dùng nào đăng nhập không
+            var ndjson = HttpContext.Session.GetString("NguoiDung");
+            if (ndjson == null)
+            {
+                return RedirectToAction("Login", "TaiKhoan");
+            }
+
+            //Kiểm tra tài khoản và mật khẩu gửi đến
+            if (string.IsNullOrWhiteSpace(taiKhoanNew.TenTaiKhoan))
+            {
+                ModelState.AddModelError("TenTaiKhoan", "Không được để trống");
+            }
+			if (string.IsNullOrWhiteSpace(taiKhoanNew.TenTaiKhoan))
+			{
+				ModelState.AddModelError("MatKhau", "Không được để trống");
+			}
+
+            //lấy người dùng ở Session
+			var nguoiDung_Session = JsonConvert.DeserializeObject<NguoiDung>(ndjson);
+
+			int check = 0;
+            //cập nhật tài khoản
+            var taiKhoan = await _TaiKhoanDAO.getByEmail(nguoiDung_Session.Email); // lấy tài khoản cũ lên
+            taiKhoan.TenTaiKhoan = taiKhoanNew.TenTaiKhoan.Trim(); // đổi email
+            taiKhoan.MatKhau = taiKhoanNew.MatKhau.Trim(); // đổi mật khẩu
+			var tk = _TaiKhoanDAO.Update(taiKhoan); // thực hiện cập nhật
+			
+            if (tk != null)
+            {
+                // đồng thời cập nhật lại email ở NguoiDung
+                var nguoiDung = await _NDdao.GetByID(nguoiDung_Session.MaND);
+                nguoiDung.Email = tk.TenTaiKhoan;
+                nguoiDung.TaiKhoan = tk;
+                var nd = _NDdao.Update(nguoiDung);
+
+                if (nd != null) {
+					//cập nhật đối tượng người dùng mới trong Session
+					HttpContext.Session.Clear();
+					var ndJson_New = JsonConvert.SerializeObject(nd, Formatting.None,
+												new JsonSerializerSettings()
+												{
+													ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+												});
+					HttpContext.Session.SetString("NguoiDung", ndJson_New);
+					HttpContext.Session.SetString("QuyenHan", tk.QuyenHan.TenQuyen);
+                    check = 1;
+				}
+                else
+                {
+                    check = 0;
+                }
+            }
+
+			ViewBag.MessageCode = check;
+			if (check == 1) {
+				ViewBag.Message = "Cập nhật thành công";
+				return View("ThongTinTaiKhoan", taiKhoan);
+			}
+
+			ViewBag.Message = "Cập nhật thất bại";
+			return View("ThongTinTaiKhoan", taiKhoan);
+
+
+
+		}
+
+
+
         public async Task<Boolean> XacThucEmail(string email)
         {
             TaiKhoan tk = await _TaiKhoanDAO.getByEmail(email);
@@ -129,6 +217,9 @@ namespace QLTuyenDung.Controllers
             }
             return true;
         }
+
+
+
 
     }
 }

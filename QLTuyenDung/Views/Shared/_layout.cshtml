@@ -22,6 +22,7 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     @{
                         var quyen = Context.Session.GetString("QuyenHan");
+
                         if (quyen == null || !quyen.ToString().Equals("Admin"))
                         {
                             
@@ -34,8 +35,16 @@
                                         Tài khoản
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
-                                        <li><a class="dropdown-item" href="#">Thông tin cá nhân</a></li>
+                                        <li>
+                                            <a class="dropdown-item" href="@Url.Action("ThongTinTaiKhoan", "TaiKhoan")">
+                                                Thông tin tài khoản
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="@Url.Action("ThongTinCaNhan", "TaiKhoan")">
+                                                Thông tin cá nhân
+                                            </a>
+                                        </li>
                                         
                                     </ul>
                                 </li>
