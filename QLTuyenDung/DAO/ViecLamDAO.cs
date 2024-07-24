@@ -32,5 +32,13 @@ namespace QLTuyenDung.DAO
             
         }
 
+        public async Task<List<ViecLam>> TimKiem(String searchString)
+        {
+            return await _dataContext.DSViecLam
+                        .Where(v => v.TieuDe.Contains(searchString) || v.MoTa.Contains(searchString))
+                        .ToListAsync();
+
+        }
+
     }
 }

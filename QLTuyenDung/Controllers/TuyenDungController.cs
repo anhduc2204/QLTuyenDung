@@ -49,6 +49,20 @@ namespace QLTuyenDung.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        [Route("TuyenDung/TimKiem")]
+        public async Task<IActionResult> TimKiem([FromQuery] String keySearch)
+        {
+            if (string.IsNullOrWhiteSpace(keySearch)) // nếu chuỗi null hoặc trống
+            {
+                var dsALL = await _ViecLamDAO.GetAll();
+                return View("Index",dsALL);
+            }
+
+            var dsViecLam = await _ViecLamDAO.TimKiem(keySearch.Trim());
+            return View("Index",dsViecLam);
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> UngTuyen(UngTuyenViewModel model)
